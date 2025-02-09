@@ -13,11 +13,16 @@ class PermissionController extends Controller
     use Error;
 
     protected $systemPermissions = [
-        'clients-all',
-        'clients-view',
-        'clients-create',
-        'clients-edit',
-        'clients-delete',
+        'claims-all',
+        'claims-view',
+        'claims-create',
+        'claims-edit',
+        'claims-delete',
+        'users-all',
+        'users-view',
+        'users-create',
+        'users-edit',
+        'users-delete',
         'roles-all',
         'roles-view',
         'roles-create',

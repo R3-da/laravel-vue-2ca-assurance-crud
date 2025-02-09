@@ -51,13 +51,14 @@ const userStore = useUserStore();
 const { index: fetchClaims, store: storeClaim, update: updateClaim } = useHttpRequest('/claims');
 
 const claims = ref([]);
-const newClaim = ref({ name: '', description: '', status: 'pending' });
+const newClaim = ref({ name: '', description: '', status: 'pending', user_id: userStore.user?.id });
 
 const isClient = userStore.user?.role === 'client';
 const isBroker = userStore.user?.role === 'broker';
 
 const loadClaims = async () => {
     claims.value = await fetchClaims();
+    console.log('Fetched claims:', claims.value); // Log the fetched claims
 };
 
 const createClaim = async () => {

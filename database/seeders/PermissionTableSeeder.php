@@ -14,7 +14,11 @@ class PermissionTableSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'users-all',
+            'claims-all',
+            'claims-view',
+            'claims-create',
+            'claims-edit',
+            'claims-delete',
             'users-view',
             'users-create',
             'users-edit',

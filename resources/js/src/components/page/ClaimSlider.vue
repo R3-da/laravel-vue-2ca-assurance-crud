@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue';
 import Slider from '../ui/Slider.vue';
 import FormInput from '../ui/FormInput.vue';
 import FormLabelError from '../ui/FormLabelError.vue';
+import VSelect from 'vue-select';  // Import vue-select
 import Button from '../ui/Button.vue';
 import AuthorizationFallback from '../../components/page/AuthorizationFallback.vue';
 
@@ -47,10 +48,20 @@ const title = computed(() =>
     props.claim ? `Update claim "${props.claim?.subject}"` : 'Add new claim',
 );
 
+// Predefined category options
+const categoryOptions = [
+    { label: 'Reimbursement', value: 'reimbursement' },
+    { label: 'Contract Issue', value: 'contract_issue' },
+    { label: 'Billing Error', value: 'billing_error' },
+    { label: 'Others', value: 'others' },
+];
+
 const initialFormData = () => {
     return {
         subject: null,
         detailed_description: null,
+        category: 'others', // Default category to 'Others'
+        status: 'Open', // Default status to 'Open'
     };
 };
 
@@ -81,6 +92,8 @@ watch(
 const schema = yup.object().shape({
     subject: yup.string().nullable().required(),
     detailed_description: yup.string().nullable().required(),
+    category: yup.string().oneOf(categoryOptions.map((c) => c.value)).required(),
+    status: yup.string().default('Open'),
 });
 
 const onSubmit = async () => {
@@ -132,6 +145,17 @@ const onSubmit = async () => {
                     :error="formErrors?.detailed_description"
                     required
                 />
+
+                <!-- Category Dropdown using VSelect -->
+                <FormLabelError label="Category">
+                    <VSelect
+                        v-model="formData.category"
+                        :options="categoryOptions"
+                        label="label"
+                        :reduce="option => option.value"
+                        :clearable="false"
+                    />
+                </FormLabelError>
 
                 <Button
                     :title="claim?.id ? 'Save' : 'Create'"

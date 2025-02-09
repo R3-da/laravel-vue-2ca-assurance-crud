@@ -88,7 +88,7 @@ const onSignIn = async () => {
                         <div>
                             <FormInput
                                 v-model="formData.password"
-                                label="Email"
+                                label="Password"
                                 type="password"
                                 :error="formErrors?.password"
                             />

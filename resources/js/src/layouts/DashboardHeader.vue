@@ -33,27 +33,24 @@ const onLogout = async () => {
         <!-- logo -->
         <RouterLink :to="{ name: 'users' }">
             <div class="text-3xl font-nabla hidden md:block">
-                <span class="logo-char animation-delay-100">R</span>
-                <span class="logo-char animation-delay-200">o</span>
-                <span class="logo-char animation-delay-300">l</span>
-                <span class="logo-char animation-delay-400">e</span>
+                <span class="logo-char animation-delay-100">2</span>
+                <span class="logo-char animation-delay-200">C</span>
+                <span class="logo-char animation-delay-300">A</span>
                 <span class="">{{ ' ' }}</span>
-                <span class="logo-char animation-delay-500">P</span>
-                <span class="logo-char animation-delay-600">e</span>
-                <span class="logo-char animation-delay-700">r</span>
-                <span class="logo-char animation-delay-800">m</span>
-                <span class="logo-char animation-delay-900">i</span>
-                <span class="logo-char animation-delay-1000">s</span>
-                <span class="logo-char animation-delay-1100">s</span>
-                <span class="logo-char animation-delay-1200">i</span>
-                <span class="logo-char animation-delay-1300">o</span>
-                <span class="logo-char animation-delay-1400">n</span>
-                <span class="logo-char animation-delay-1500">s</span>
+                <span class="logo-char animation-delay-500">I</span>
+                <span class="logo-char animation-delay-600">n</span>
+                <span class="logo-char animation-delay-700">s</span>
+                <span class="logo-char animation-delay-800">u</span>
+                <span class="logo-char animation-delay-900">r</span>
+                <span class="logo-char animation-delay-1000">a</span>
+                <span class="logo-char animation-delay-1100">n</span>
+                <span class="logo-char animation-delay-1200">c</span>
+                <span class="logo-char animation-delay-1300">e</span>
             </div>
             <div class="text-2xl font-nabla md:hidden">
-                <span class="logo-char animation-delay-100">R</span>
-                <span class="">{{ ' ' }}</span>
-                <span class="logo-char animation-delay-200">P</span>
+                <span class="logo-char animation-delay-100">2</span>
+                <span class="logo-char animation-delay-200">C</span>
+                <span class="logo-char animation-delay-300">A</span>
             </div>
         </RouterLink>
 

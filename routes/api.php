@@ -102,4 +102,29 @@ Route::middleware('auth:sanctum')->group(function () {
         \App\Http\Controllers\PermissionController::class,
         'destroy',
     ])->middleware('permission:permissions-all|permissions-delete');
+
+    /**
+     * ------------------------------------------------------------------------
+     * claims routes
+     * ------------------------------------------------------------------------
+     */
+    Route::get('claims', [
+        \App\Http\Controllers\ClaimController::class,
+        'index',
+    ])->middleware('permission:claims-all|claims-view');
+
+    Route::post('claims', [
+        \App\Http\Controllers\ClaimController::class,
+        'store',
+    ])->middleware('permission:claims-all|claims-create');
+
+    Route::patch('claims/{claim}', [
+        \App\Http\Controllers\ClaimController::class,
+        'update',
+    ])->middleware('permission:claims-all|claims-edit');
+
+    Route::delete('claims/{claim}', [
+        \App\Http\Controllers\ClaimController::class,
+        'destroy',
+    ])->middleware('permission:claims-all|claims-delete');
 });

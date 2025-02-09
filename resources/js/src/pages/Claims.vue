@@ -4,22 +4,40 @@
         <div v-if="isClient">
             <h2>Create a Claim</h2>
             <form @submit.prevent="createClaim">
+                <input v-model="newClaim.name" placeholder="Name" required />
                 <input v-model="newClaim.description" placeholder="Description" required />
                 <button type="submit">Submit</button>
             </form>
         </div>
-        <div v-if="isBroker">
-            <h2>Update Claim Status</h2>
-            <ul>
-                <li v-for="claim in claims" :key="claim.id">
-                    <span>{{ claim.description }}</span>
-                    <select v-model="claim.status" @change="updateClaimStatus(claim)">
-                        <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="rejected">Rejected</option>
-                    </select>
-                </li>
-            </ul>
+        <div>
+            <h2>Manage Claims</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th v-if="isBroker">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="claim in claims" :key="claim.id">
+                        <td>{{ claim.name }}</td>
+                        <td>{{ claim.description }}</td>
+                        <td>
+                            <span v-if="!isBroker">{{ claim.status }}</span>
+                            <select v-else v-model="claim.status" @change="updateClaimStatus(claim)">
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </td>
+                        <td v-if="isBroker">
+                            <button @click="updateClaimStatus(claim)">Update Status</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -33,7 +51,7 @@ const userStore = useUserStore();
 const { index: fetchClaims, store: storeClaim, update: updateClaim } = useHttpRequest('/claims');
 
 const claims = ref([]);
-const newClaim = ref({ description: '', status: 'pending' });
+const newClaim = ref({ name: '', description: '', status: 'pending' });
 
 const isClient = userStore.user?.role === 'client';
 const isBroker = userStore.user?.role === 'broker';
@@ -44,6 +62,7 @@ const loadClaims = async () => {
 
 const createClaim = async () => {
     await storeClaim(newClaim.value);
+    newClaim.value.name = '';
     newClaim.value.description = '';
     await loadClaims();
 };

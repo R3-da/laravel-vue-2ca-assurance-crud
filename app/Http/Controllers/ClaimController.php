@@ -16,20 +16,33 @@ class ClaimController extends Controller
     public function store(Request $request)
     {
         try {
-
             \Illuminate\Support\Facades\Log::info('New claim created', $request->all());
+
             // Validate the request data
             $validated = $request->validate([
-                'name' => ['required', 'string', 'max:255', 'unique:claims,name'], // Ensure the name is unique in the claims table
-                'description' => ['required', 'string'],
-                'user_id' => ['required', 'exists:users,id'], // Ensure the user_id exists in the users table
+                'subject' => ['required', 'string', 'max:255', 'unique:claims,subject'],
+                'detailed_description' => ['required', 'string'],
+                'user.id' => ['required', 'exists:users,id'], // Validating the nested user.id
+                'category' => ['required', 'string'],
+                'status' => ['required', 'string'],
+                'broker_id' => ['nullable', 'exists:users,id'], // Optional field
             ]);
 
             // Create a new claim
             $claim = new Claim();
+
+            // Manually assign user_id instead of user.id
+            $claim->user_id = $validated['user']['id']; // Correctly assign the user_id field
+
+            // Assign other validated fields
             foreach ($validated as $key => $val) {
-                $claim->{$key} = $val;
+                // Avoid setting 'user.id' as it is handled separately
+                if ($key !== 'user') {
+                    $claim->{$key} = $val;
+                }
             }
+
+            // Save the claim
             $claim->save();
 
             // Return the created claim as a JSON response

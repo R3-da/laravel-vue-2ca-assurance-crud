@@ -19,7 +19,7 @@ Following credentials can be used to log in the system
         <tr>
             <td>01</td>
             <td>Admin</td>
-            <td>admin@sadmin.com</td>
+            <td>admin@admin.com</td>
             <td>password</td>
         </tr>
     </tbody>

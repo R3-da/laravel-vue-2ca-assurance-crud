@@ -66,10 +66,10 @@ const onSignIn = async () => {
 
                     <div>
                         <div class="font-bold underline">
-                            Super admin credentials
+                            admin credentials
                         </div>
                         <div class="dark:text-[#aaa]">
-                            <b>email:</b> "sadmin@sadmin.com"
+                            <b>email:</b> "admin@admin.com"
                         </div>
                         <div class="dark:text-[#aaa]">
                             <b>password:</b> "password"

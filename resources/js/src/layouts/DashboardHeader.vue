@@ -59,6 +59,19 @@ const onLogout = async () => {
         <div class="flex-start gap-4 lg:gap-8">
             <div class="flex flex-col gap-0.5">
                 <div class="flex-start gap-6 lg:gap-8">
+                    <RouterLink :to="{ name: 'claims' }">
+                        <template v-slot="{ isActive }">
+                            <span
+                                class="lg:text-lg font-bold"
+                                :class="[
+                                    isActive
+                                        ? 'text-active'
+                                        : 'hover:text-active-hover',
+                                ]"
+                                >Claims</span
+                            >
+                        </template>
+                    </RouterLink>
                     <RouterLink :to="{ name: 'users' }">
                         <template v-slot="{ isActive }">
                             <span

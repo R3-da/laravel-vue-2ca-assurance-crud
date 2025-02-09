@@ -10,6 +10,16 @@ export default [
     },
 
     {
+        path: '/claims',
+        name: 'claims',
+        component: () => import('../pages/Claims.vue'),
+        meta: {
+            layout: 'dashboard',
+            permissions: ['claims-all', 'claims-view'],
+        },
+    },
+
+    {
         path: '/users',
         name: 'users',
         component: () => import('../pages/Users.vue'),

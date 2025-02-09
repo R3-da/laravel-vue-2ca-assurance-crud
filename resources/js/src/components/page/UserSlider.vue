@@ -90,7 +90,7 @@ const roleOptions = computed(() => {
     return roleStore.roles.filter(
         (role) =>
             !formDataRoleIds.includes(role?.id?.toString()) &&
-            role?.name !== 'super-admin',
+            role?.name !== 'admin',
     );
 });
 

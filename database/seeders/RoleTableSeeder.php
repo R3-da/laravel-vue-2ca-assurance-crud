@@ -14,19 +14,15 @@ class RoleTableSeeder extends Seeder
     {
         $roles = [
             [
-                'name' => 'super-admin',
-                'created_at' => now(),
-            ],
-            [
                 'name' => 'admin',
                 'created_at' => now(),
             ],
             [
-                'name' => 'author',
+                'name' => 'broker',
                 'created_at' => now(),
             ],
             [
-                'name' => 'editor',
+                'name' => 'client',
                 'created_at' => now(),
             ],
         ];

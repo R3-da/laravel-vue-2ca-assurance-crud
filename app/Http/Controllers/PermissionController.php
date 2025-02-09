@@ -13,11 +13,11 @@ class PermissionController extends Controller
     use Error;
 
     protected $systemPermissions = [
-        'users-all',
-        'users-view',
-        'users-create',
-        'users-edit',
-        'users-delete',
+        'clients-all',
+        'clients-view',
+        'clients-create',
+        'clients-edit',
+        'clients-delete',
         'roles-all',
         'roles-view',
         'roles-create',
@@ -49,8 +49,8 @@ class PermissionController extends Controller
             }
             $permission->save();
 
-            $superAdminRole = Role::where('name', 'super-admin')->first();
-            $superAdminRole->permissions()->attach([$permission->id]);
+            $adminRole = Role::where('name', 'admin')->first();
+            $adminRole->permissions()->attach([$permission->id]);
 
             return response()->json($permission);
         } catch (\Exception $error) {

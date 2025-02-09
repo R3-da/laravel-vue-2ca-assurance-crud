@@ -18,72 +18,24 @@ Following credentials can be used to log in the system
     <tbody>
         <tr>
             <td>01</td>
-            <td>Super Admin</td>
-            <td>sadmin@sadmin.com</td>
+            <td>Admin</td>
+            <td>admin@sadmin.com</td>
             <td>password</td>
         </tr>
     </tbody>
     <tbody>
         <tr>
             <td>02</td>
-            <td>Admin</td>
-            <td>admin@admin.com</td>
+            <td>Broker</td>
+            <td>broker@broker.com</td>
             <td>password</td>
         </tr>
     </tbody>
         <tbody>
         <tr>
             <td>03</td>
-            <td>Author</td>
-            <td>author@author.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-        <tbody>
-        <tr>
-            <td>04</td>
-            <td>Editor</td>
-            <td>editor@editor.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-        <tbody>
-        <tr>
-            <td>05</td>
-            <td>User</td>
-            <td>user@user.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-        <tbody>
-        <tr>
-            <td>06</td>
-            <td>User</td>
-            <td>user1@user.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-        <tbody>
-        <tr>
-            <td>07</td>
-            <td>User</td>
-            <td>user2@user.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-        <tbody>
-        <tr>
-            <td>08</td>
-            <td>User</td>
-            <td>user3@user.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-        <tbody>
-        <tr>
-            <td>09</td>
-            <td>User</td>
-            <td>user4@user.com</td>
+            <td>Client</td>
+            <td>client@client.com</td>
             <td>password</td>
         </tr>
     </tbody>

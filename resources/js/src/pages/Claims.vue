@@ -38,7 +38,7 @@ const onDelete = (claim) => {
 
         const isDeleted = await deleteClaim(claim?.id);
         if (isDeleted) {
-            showToast(`Claim "${claim?.name}" deleted successfully...`);
+            showToast(`Claim "${claim?.subject}" deleted successfully...`);
             claimStore.loadClaims();
             userStore.loadUsers();
         }
@@ -60,8 +60,10 @@ const onDelete = (claim) => {
                     <THead>
                         <Tr>
                             <Th> Id </Th>
-                            <Th> Claim </Th>
-                            <Th> Description </Th>
+                            <Th> Subject </Th> <!-- Sujet -->
+                            <Th> Detailed Description </Th> <!-- Description détaillée -->
+                            <Th> Category </Th> <!-- Catégorie -->
+                            <Th> Status </Th> <!-- Statut -->
                             <Th> Action </Th>
                         </Tr>
                     </THead>
@@ -76,12 +78,28 @@ const onDelete = (claim) => {
                                 <div
                                     class="text-emerald-500 dark:text-emerald-200"
                                 >
-                                    {{ claim?.name }}
+                                    {{ claim?.subject }}
                                 </div>
                             </Td>
 
                             <Td>
-                                {{ claim?.description }}
+                                {{ claim?.detailed_description }}
+                            </Td>
+                            <Td>
+                                {{ claim?.category }}
+                            </Td>
+                            <Td>
+                                <!-- Display the status with dynamic styling -->
+                                <span
+                                    :class="{
+                                        'text-green-500': claim?.status === 'Open',
+                                        'text-yellow-500': claim?.status === 'In Progress',
+                                        'text-blue-500': claim?.status === 'Resolved',
+                                        'text-gray-500': claim?.status === 'Closed',
+                                    }"
+                                >
+                                    {{ claim?.status }}
+                                </span>
                             </Td>
                             <Td class="align-middle">
                                 <div class="flex flex-col gap-2">

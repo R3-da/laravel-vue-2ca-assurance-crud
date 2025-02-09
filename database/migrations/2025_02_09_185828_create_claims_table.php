@@ -10,9 +10,10 @@ class CreateClaimsTable extends Migration
     {
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->string('status')->default('pending');
+            $table->string('subject'); // Sujet
+            $table->text('detailed_description'); // Description détaillée
+            $table->string('category'); // Catégorie
+            $table->string('status')->default('Open'); // Statut avec valeur par défaut
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('broker_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();

@@ -44,13 +44,13 @@ const requiredPermissions = computed(() => {
 });
 
 const title = computed(() =>
-    props.claim ? `Update claim "${props.claim?.name}"` : 'Add new claim',
+    props.claim ? `Update claim "${props.claim?.subject}"` : 'Add new claim',
 );
 
 const initialFormData = () => {
     return {
-        name: null,
-        description: null,
+        subject: null,
+        detailed_description: null,
     };
 };
 
@@ -79,8 +79,8 @@ watch(
 );
 
 const schema = yup.object().shape({
-    name: yup.string().nullable().required(),
-    description: yup.string().nullable().required(),
+    subject: yup.string().nullable().required(),
+    detailed_description: yup.string().nullable().required(),
 });
 
 const onSubmit = async () => {
@@ -119,17 +119,17 @@ const onSubmit = async () => {
         <AuthorizationFallback :permissions="requiredPermissions">
             <div class="mt-4 space-y-4">
                 <FormInput
-                    v-model="formData.name"
+                    v-model="formData.subject"
                     :focus="show"
-                    label="Name"
-                    :error="formErrors?.name"
+                    label="Subject"
+                    :error="formErrors?.subject"
                     required
                 />
 
                 <FormInput
-                    v-model="formData.description"
-                    label="Description"
-                    :error="formErrors?.description"
+                    v-model="formData.detailed_description"
+                    label="Detailed Description"
+                    :error="formErrors?.detailed_description"
                     required
                 />
 

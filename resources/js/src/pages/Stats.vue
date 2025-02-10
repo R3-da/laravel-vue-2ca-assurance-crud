@@ -15,10 +15,7 @@ const chart = ref(null);
 let chartInstance = null;
 
 // Load initial data
-if (!permissionStore.permissions.length) {
-    await permissionStore.loadPermissions();
-}
-if (!statsStore.stats) {
+if (!statsStore.stats.length) {
     await statsStore.loadStats();
 }
 

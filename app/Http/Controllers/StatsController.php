@@ -12,6 +12,11 @@ class StatsController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
+        // log the start and end dates
+        \Illuminate\Support\Facades\Log::info('Start date: ' . $startDate);
+        \Illuminate\Support\Facades\Log::info('End date: ' . $endDate);
+        \Illuminate\Support\Facades\Log::info('Query Parameters:', $request->all());
+
         $query = Claim::query();
 
         if ($startDate && $endDate) {

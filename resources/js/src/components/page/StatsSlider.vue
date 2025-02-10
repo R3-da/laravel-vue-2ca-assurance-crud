@@ -31,6 +31,9 @@ const updateStats = async () => {
         start_date: dateRange.value.start,
         end_date: dateRange.value.end
     };
+
+    console.log("Sending params:", params); // 🔍 Debug log
+
     const data = await fetchStats(params);
     if (data) {
         statsStore.$patch({ stats: data });

@@ -10,21 +10,19 @@ const useHttpRequest = (path = '') => {
     const updating = ref(false);
     const deleting = ref(false);
 
-    const index = async (callback = null) => {
+    const index = async (params = {}, callback = null) => {
         try {
             loading.value = true;
-            const response = await axios.get(path);
+            console.log(`Fetching from ${path} with`, params); // 🔍 Debug log
+            const response = await axios.get(path, { params }); // ✅ Pass query params
             loading.value = false;
-
+    
             if (typeof callback === 'function') {
                 callback(null, response);
             }
             initialLoading.value = false;
-
-            if (response.data) {
-                return response.data;
-            }
-            return [];
+    
+            return response.data ?? [];
         } catch (error) {
             loading.value = false;
             return handleError(error, [], callback, false);

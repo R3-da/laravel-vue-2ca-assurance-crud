@@ -17,14 +17,18 @@ const useStatsStore = defineStore('stats', () => {
         openClaims: 0,
     });
 
-    const loadStats = async () => {
-        const res = await getStats();
-        stats.value = res;
+    // Accept `params` (start_date, end_date) when loading stats
+    const loadStats = async (params = {}) => {
+        console.log("Fetching stats with params:", params); // Debug log
+        const res = await getStats(params);
+        if (res) {
+            stats.value = res;
+        }
     };
 
     return {
         stats,
-        loadStats,
+        loadStats, // Now accepts query parameters
         statsLoading,
         statsFirstTimeLoading,
     };

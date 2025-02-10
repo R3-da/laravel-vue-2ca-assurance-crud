@@ -6,15 +6,20 @@ import useHttpRequest from '../composables/useHttpRequest';
 const statsStore = useStatsStore();
 const { index: fetchStats } = useHttpRequest('/stats');
 
+// Get first and last day of current month
+const currentDate = new Date();
+const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
 const dateRange = ref({
-    start: new Date(new Date().setMonth(new Date().getMonth() - 1)),
-    end: new Date()
+    start: firstDay.toISOString().split('T')[0],
+    end: lastDay.toISOString().split('T')[0]
 });
 
 const updateStats = async () => {
     const params = {
-        start_date: dateRange.value.start.toISOString().split('T')[0],
-        end_date: dateRange.value.end.toISOString().split('T')[0]
+        start_date: dateRange.value.start,
+        end_date: dateRange.value.end
     };
     await fetchStats(params);
 };

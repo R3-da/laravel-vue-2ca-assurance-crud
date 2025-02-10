@@ -21,7 +21,10 @@ const updateStats = async () => {
         start_date: dateRange.value.start,
         end_date: dateRange.value.end
     };
-    await fetchStats(params);
+    const data = await fetchStats(params);
+    if (data) {
+        statsStore.$patch({ stats: data });
+    }
 };
 
 onMounted(async () => {

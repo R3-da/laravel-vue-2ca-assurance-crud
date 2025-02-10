@@ -4,10 +4,10 @@ import useHttpRequest from '../composables/useHttpRequest';
 
 const useStatsStore = defineStore('stats', () => {
     const {
-        index: fetchStatsRequest,
+        index: getStats,
         loading: statsLoading,
         initialLoading: statsFirstTimeLoading,
-    } = useHttpRequest('/api/stats');
+    } = useHttpRequest('/stats');
 
     const stats = ref({
         totalClaims: 0,
@@ -17,9 +17,9 @@ const useStatsStore = defineStore('stats', () => {
         openClaims: 0,
     });
 
-    const loadStats = async (params) => {
-        const response = await fetchStatsRequest(params);
-        stats.value = response;
+    const loadStats = async () => {
+        const res = await getStats();
+        stats.value = res;
     };
 
     return {

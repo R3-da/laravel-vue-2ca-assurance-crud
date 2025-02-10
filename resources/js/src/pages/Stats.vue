@@ -1,13 +1,23 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import useStatsStore from '../store/useStatsStore';
+import usePermissionStore from '../store/usePermissionStore';
 import StatsSlider from '../components/page/StatsSlider.vue';
 import Chart from 'chart.js/auto';
 import AuthorizationFallback from '../components/page/AuthorizationFallback.vue';
 
 const statsStore = useStatsStore();
+const permissionStore = usePermissionStore();
 const chart = ref(null);
 let chartInstance = null;
+
+// Load initial data
+if (!permissionStore.permissions.length) {
+    await permissionStore.loadPermissions();
+}
+if (!statsStore.stats) {
+    await statsStore.loadStats();
+}
 
 const initChart = () => {
     if (chartInstance) {

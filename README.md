@@ -1,6 +1,6 @@
 ## About This Repository
 
-a Laravel and Vue.js Livewire Inerbased web application for managing Insurance Claims.
+a Laravel and Vue.js Livewire Inerbased web application for managing Insurance Claims for 2CA Business.
 
 ## Logging In
 

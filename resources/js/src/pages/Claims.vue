@@ -11,14 +11,12 @@ import DeleteButton from '../components/ui/DeleteButton.vue';
 import AuthorizationFallback from '../components/page/AuthorizationFallback.vue';
 import ClaimSlider from '../components/page/ClaimSlider.vue';
 
-import useUserStore from '../store/useUserStore';
 import useClaimStore from '../store/useClaimStore';
 import usePermissionStore from '../store/usePermissionStore';
 import useSlider from '../composables/useSlider';
 import useModalToast from '../composables/useModalToast';
 import useHttpRequest from '../composables/useHttpRequest';
 
-const userStore = useUserStore();
 const claimStore = useClaimStore();
 const permissionStore = usePermissionStore();
 
@@ -40,7 +38,6 @@ const onDelete = (claim) => {
         if (isDeleted) {
             showToast(`Claim "${claim?.subject}" deleted successfully...`);
             claimStore.loadClaims();
-            userStore.loadUsers();
         }
     });
 };

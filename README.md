@@ -1,6 +1,6 @@
 ## About This Repository
 
-This repository uses PHP Laravel version 10, Javascript Vue.js version 3 and Tailwind css frameworks to implement Role Permissions management in CMS. Vite is used to compile the frontend assets. Cookie based SPA authorization feature of Laravel Sanctum package is used to authorize the user inside the content management system. Vue router is used to handle the routing and Pinia is used as the frontend store management system. If a logged user has permission to do specific task, the link to visit the task and the page containing the task will be available to the logged user. Otherwise the page will be unavailable to the logged user with 401 unauthorized error even though try to access the route manually. Though some actions are visible on the frontend for better user experience, but it will handled on the backend and shows a error toast with relevant error message as well as permission requirements. This repo utilizes the SPA feature of Vue.js.
+a Laravel and Vue.js Livewire Inerbased web application for managing Insurance Claims.
 
 ## Logging In
 
@@ -42,7 +42,7 @@ Following credentials can be used to log in the system
 </table>
 <br>
 
-Initailly only Super Admin is granted all the permissions. All other role has no permissions. To add permissions to any other role, first log in as super admin, then go to the roles page. Assign necessary permissions to the role. Then come to the users page and update users roles. One user can have multiple roles. Overall user permissions will be the collection of all roles permissions combined. Super admin role is readonly(can not be edited or deleted). This role can not be applied to any other user. If a new permission is created, updated or deleted, it will be automatically applied to super admin.
+Initailly only Admin is granted all the permissions. All other role has no permissions. To add permissions to any other role, first log in as super admin, then go to the roles page. Assign necessary permissions to the role. Then come to the users page and update users roles. One user can have multiple roles. Overall user permissions will be the collection of all roles permissions combined. admin role is readonly(can not be edited or deleted). This role can not be applied to any other user. If a new permission is created, updated or deleted, it will be automatically applied to admin.
 
 ## Installation
 
@@ -67,7 +67,7 @@ This will store all the default data into the database. Then compile the assets 
     <code>npm run dev</code>
 </pre>
 
-Finally initiate your server on a new terminal and enjoy !!!
+Finally initiate your server on a new terminal
 
 <pre>
     <code>php artisan serve</code>

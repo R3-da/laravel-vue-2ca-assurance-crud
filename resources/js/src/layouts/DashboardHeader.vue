@@ -33,24 +33,12 @@ const onLogout = async () => {
         <!-- logo -->
         <RouterLink :to="{ name: 'users' }">
             <div class="text-3xl font-nabla hidden md:block">
-                <span class="logo-char animation-delay-100">2</span>
-                <span class="logo-char animation-delay-200">C</span>
-                <span class="logo-char animation-delay-300">A</span>
-                <span class="">{{ ' ' }}</span>
-                <span class="logo-char animation-delay-500">I</span>
-                <span class="logo-char animation-delay-600">n</span>
-                <span class="logo-char animation-delay-700">s</span>
-                <span class="logo-char animation-delay-800">u</span>
-                <span class="logo-char animation-delay-900">r</span>
-                <span class="logo-char animation-delay-1000">a</span>
-                <span class="logo-char animation-delay-1100">n</span>
-                <span class="logo-char animation-delay-1200">c</span>
-                <span class="logo-char animation-delay-1300">e</span>
+                <!-- Replace the text logo with the image logo -->
+                <img src="@/src/assets/2ca-logo.png" alt="2CA Logo" class="w-auto h-12">
             </div>
             <div class="text-2xl font-nabla md:hidden">
-                <span class="logo-char animation-delay-100">2</span>
-                <span class="logo-char animation-delay-200">C</span>
-                <span class="logo-char animation-delay-300">A</span>
+                <!-- Replace the text logo with the image logo for mobile -->
+                <img src="@/src/assets/2ca-logo.png" alt="2CA Logo" class="w-auto h-10">
             </div>
         </RouterLink>
 

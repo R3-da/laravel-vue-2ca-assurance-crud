@@ -1,12 +1,22 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import Slider from '../ui/Slider.vue';
+import FormInput from '../ui/FormInput.vue';
+import Button from '../ui/Button.vue';
 import useStatsStore from '../../store/useStatsStore';
 import useHttpRequest from '../../composables/useHttpRequest';
+
+const props = defineProps({
+    show: {
+        type: Boolean,
+        default: () => false,
+    }
+});
+const emit = defineEmits(['hide']);
 
 const statsStore = useStatsStore();
 const { index: fetchStats } = useHttpRequest('/stats');
 
-// Get first and last day of current month
 const currentDate = new Date();
 const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
@@ -26,30 +36,36 @@ const updateStats = async () => {
         statsStore.$patch({ stats: data });
     }
 };
-
-onMounted(async () => {
-    await updateStats();
-});
 </script>
 
 <template>
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold">Statistics Filter</h2>
-            <div class="flex gap-4">
-                <input 
-                    type="date" 
+    <Slider
+        :show="show"
+        title="Statistics Filter"
+        @hide="emit('hide')"
+    >
+        <div class="mt-4 space-y-4">
+            <div class="flex flex-col gap-4">
+                <FormInput
+                    type="date"
                     v-model="dateRange.start"
-                    class="rounded border p-2 dark:bg-gray-700"
+                    label="Start Date"
                     @change="updateStats"
-                >
-                <input 
-                    type="date" 
+                />
+                
+                <FormInput
+                    type="date"
                     v-model="dateRange.end"
-                    class="rounded border p-2 dark:bg-gray-700"
+                    label="End Date"
                     @change="updateStats"
-                >
+                />
+
+                <Button
+                    title="Apply Filter"
+                    class="!w-full"
+                    @click="updateStats"
+                />
             </div>
         </div>
-    </div>
+    </Slider>
 </template>

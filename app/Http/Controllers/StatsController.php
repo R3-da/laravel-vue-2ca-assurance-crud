@@ -20,13 +20,10 @@ class StatsController extends Controller
 
         $stats = [
             'totalClaims' => $query->count(),
-            'approvedClaims' => $query->where('status', 'approved')->count(),
-            'pendingClaims' => $query->where('status', 'pending')->count(),
-            'rejectedClaims' => $query->where('status', 'rejected')->count(),
-            'monthlyStats' => $query
-                ->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-                ->groupBy('month')
-                ->get()
+            'approvedClaims' => (clone $query)->where('status', 'approved')->count(),
+            'pendingClaims' => (clone $query)->where('status', 'pending')->count(),
+            'rejectedClaims' => (clone $query)->where('status', 'rejected')->count(),
+            'openClaims' => (clone $query)->where('status', 'open')->count(),
         ];
 
         return response()->json($stats);

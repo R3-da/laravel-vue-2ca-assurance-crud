@@ -15,16 +15,27 @@ class PermissionRoleTableSeeder extends Seeder
     {
         $permissionRole = [];
 
+        // Add claims-related permissions to client and broker
+        // Client role gets 'claims-view' and 'claims-create'
+        $clientRoleId = 2; // Assuming the role ID for Client is 2
+        $brokerRoleId = 3; // Assuming the role ID for Broker is 3
+
+        $permissionRole[] = ['role_id' => $clientRoleId, 'permission_id' => 2, 'created_at' => now()]; // claims-view
+        $permissionRole[] = ['role_id' => $clientRoleId, 'permission_id' => 3, 'created_at' => now()]; // claims-create
+
+        $permissionRole[] = ['role_id' => $brokerRoleId, 'permission_id' => 2, 'created_at' => now()]; // claims-view
+        $permissionRole[] = ['role_id' => $brokerRoleId, 'permission_id' => 4, 'created_at' => now()]; // claims-edit
+
+        // Add the rest of the permissions to role_id 1 (admin)
         for ($i = 1; $i <= 21; $i++) {
-            $item = [
-                'role_id' => 1,
+            $permissionRole[] = [
+                'role_id' => 1, // Assuming 1 is for Admin
                 'permission_id' => $i,
                 'created_at' => now(),
             ];
-
-            $permissionRole[] = $item;
         }
 
+        // Insert into the pivot table
         DB::table('permission_role')->insert($permissionRole);
     }
 }

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useStatsStore } from '../store/useStatsStore';
-import StatsSlider from '../components/StatsSlider.vue';
+import StatsSlider from '../components/page/StatsSlider.vue';
 import Chart from 'chart.js/auto';
 import AuthorizationFallback from '../components/page/AuthorizationFallback.vue';
 

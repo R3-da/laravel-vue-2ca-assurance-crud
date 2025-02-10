@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useStatsStore } from '../store/useStatsStore';
-import useHttpRequest from '../composables/useHttpRequest';
+import { useStatsStore } from '../../store/useStatsStore';
+import useHttpRequest from '../../composables/useHttpRequest';
 
 const statsStore = useStatsStore();
 const { index: fetchStats } = useHttpRequest('/stats');

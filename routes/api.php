@@ -127,4 +127,15 @@ Route::middleware('auth:sanctum')->group(function () {
         \App\Http\Controllers\ClaimController::class,
         'destroy',
     ])->middleware('permission:claims-all|claims-delete');
+
+    /**
+     * ------------------------------------------------------------------------
+     * stats routes
+     * ------------------------------------------------------------------------
+     */
+    Route::get('/stats', [
+        \App\Http\Controllers\StatsController::class,
+        'index'
+    ])->middleware(['auth:sanctum', 'permission:stats-all|stats-view']);
+
 });

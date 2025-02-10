@@ -33,6 +33,8 @@ class PermissionController extends Controller
         'permissions-create',
         'permissions-edit',
         'permissions-delete',
+        'stats-all',
+        'stats-view'
     ];
 
     public function index(Request $request)

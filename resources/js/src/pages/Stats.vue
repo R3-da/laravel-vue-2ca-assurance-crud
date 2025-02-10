@@ -1,74 +1,107 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
+import { useStatsStore } from '../store/useStatsStore';
+import StatsSlider from '../components/StatsSlider.vue';
 import Chart from 'chart.js/auto';
+import DashboardHeader from '../layouts/DashboardHeader.vue';
+import AuthorizationFallback from '../components/page/AuthorizationFallback.vue';
 
-const chartData = ref(null);
+const statsStore = useStatsStore();
+const chart = ref(null);
+
+const initChart = () => {
+  const ctx = document.getElementById('statsChart');
+  chart.value = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Total Claims', 'Approved', 'Pending', 'Rejected'],
+          datasets: [{
+              label: 'Claims Statistics',
+              data: [
+                  statsStore.stats.totalClaims,
+                  statsStore.stats.approvedClaims,
+                  statsStore.stats.pendingClaims,
+                  statsStore.stats.rejectedClaims
+              ],
+              backgroundColor: [
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(255, 99, 132, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(255, 99, 132, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+};
+
+watch(() => statsStore.stats, () => {
+  if (chart.value) {
+      chart.value.data.datasets[0].data = [
+          statsStore.stats.totalClaims,
+          statsStore.stats.approvedClaims,
+          statsStore.stats.pendingClaims,
+          statsStore.stats.rejectedClaims
+      ];
+      chart.value.update();
+  }
+}, { deep: true });
 
 onMounted(() => {
-  const ctx = document.getElementById('statsChart');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Claims', 'Approved', 'Pending', 'Rejected'],
-      datasets: [{
-        label: 'Claims Statistics',
-        data: [12, 19, 3, 5],
-        backgroundColor: [
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(255, 99, 132, 0.2)'
-        ],
-        borderColor: [
-          'rgba(75, 192, 192, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(255, 99, 132, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
+  initChart();
 });
 </script>
 
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold mb-6">Statistics Dashboard</h1>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Chart Container -->
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-        <canvas id="statsChart"></canvas>
-      </div>
-      
-      <!-- Summary Cards -->
-      <div class="grid grid-cols-2 gap-4">
-        <div class="bg-emerald-100 dark:bg-emerald-800 p-4 rounded-lg">
-          <h3 class="font-bold">Total Claims</h3>
-          <p class="text-2xl">39</p>
+    <AuthorizationFallback :permissions="['stats-all', 'stats-view']">
+        <DashboardHeader />
+        <div class="w-full space-y-4 py-6">
+            <div class="flex-between">
+                <h2 class="text-active font-bold text-2xl">Statistics Dashboard</h2>
+            </div>
+
+            <StatsSlider />
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Chart Container -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <canvas id="statsChart"></canvas>
+                </div>
+                
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-emerald-100 dark:bg-emerald-800 p-4 rounded-lg">
+                        <h3 class="font-bold">Total Claims</h3>
+                        <p class="text-2xl">{{ statsStore.stats.totalClaims }}</p>
+                    </div>
+                    <div class="bg-blue-100 dark:bg-blue-800 p-4 rounded-lg">
+                        <h3 class="font-bold">Approved</h3>
+                        <p class="text-2xl">{{ statsStore.stats.approvedClaims }}</p>
+                    </div>
+                    <div class="bg-yellow-100 dark:bg-yellow-800 p-4 rounded-lg">
+                        <h3 class="font-bold">Pending</h3>
+                        <p class="text-2xl">{{ statsStore.stats.pendingClaims }}</p>
+                    </div>
+                    <div class="bg-red-100 dark:bg-red-800 p-4 rounded-lg">
+                        <h3 class="font-bold">Rejected</h3>
+                        <p class="text-2xl">{{ statsStore.stats.rejectedClaims }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="bg-blue-100 dark:bg-blue-800 p-4 rounded-lg">
-          <h3 class="font-bold">Approved</h3>
-          <p class="text-2xl">19</p>
-        </div>
-        <div class="bg-yellow-100 dark:bg-yellow-800 p-4 rounded-lg">
-          <h3 class="font-bold">Pending</h3>
-          <p class="text-2xl">3</p>
-        </div>
-        <div class="bg-red-100 dark:bg-red-800 p-4 rounded-lg">
-          <h3 class="font-bold">Rejected</h3>
-          <p class="text-2xl">5</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    </AuthorizationFallback>
 </template>

@@ -8,6 +8,12 @@ export default [
             permissions: [],
         },
     },
+    {
+        path: '/stats',
+        name: 'stats',
+        component: () => import('../pages/Stats.vue'),
+        meta: { requiresAuth: true }
+    },
 
     {
         path: '/claims',

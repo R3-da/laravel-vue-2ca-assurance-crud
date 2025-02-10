@@ -12,7 +12,10 @@ export default [
         path: '/stats',
         name: 'stats',
         component: () => import('../pages/Stats.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+            layout: 'dashboard',
+            permissions: ['stats-all', 'stats-view'],
+        },
     },
 
     {

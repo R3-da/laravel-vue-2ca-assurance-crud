@@ -3,7 +3,6 @@ import { ref, onMounted, watch } from 'vue';
 import { useStatsStore } from '../store/useStatsStore';
 import StatsSlider from '../components/StatsSlider.vue';
 import Chart from 'chart.js/auto';
-import DashboardHeader from '../layouts/DashboardHeader.vue';
 import AuthorizationFallback from '../components/page/AuthorizationFallback.vue';
 
 const statsStore = useStatsStore();
@@ -68,7 +67,6 @@ onMounted(() => {
 
 <template>
     <AuthorizationFallback :permissions="['stats-all', 'stats-view']">
-        <DashboardHeader />
         <div class="w-full space-y-4 py-6">
             <div class="flex-between">
                 <h2 class="text-active font-bold text-2xl">Statistics Dashboard</h2>

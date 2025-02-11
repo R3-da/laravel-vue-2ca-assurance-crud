@@ -13,14 +13,11 @@ const permissionStore = usePermissionStore();
 const chart = ref(null);
 let chartInstance = null;
 
-// Load initial data inside onMounted hook
-onMounted(async () => {
-    if (!statsStore.stats.length) {
-        await statsStore.loadStats();
-    }
-    console.log(statsStore.stats);  // Debugging log to check the structure of stats
-    initChart(); // Initialize chart after loading stats
-});
+// Load initial data
+if (!statsStore.stats.length) {
+    await statsStore.loadStats();
+}
+console.log(statsStore.stats);  // Debugging log to check the structure of stats
 
 const initChart = () => {
     if (chartInstance) {
@@ -94,6 +91,10 @@ watch(() => statsStore.stats, (newStats) => {
         }
     }
 }, { deep: true });
+
+onMounted(async () => {
+    initChart(); // Initialize chart after loading stats
+});
 
 onUnmounted(() => {
     if (chartInstance) {

@@ -57,7 +57,10 @@ class ClaimController extends Controller
     public function update(Request $request, Claim $claim)
     {
         $validated = $request->validate([
-            'status' => 'required|string|in:pending,approved,rejected',
+            'subject' => 'required|string',
+            'detailed_description' => 'required|string',
+            'category' => 'required|string|in:Refund,Contract Issue,Billing Error,Other',
+            'status' => 'required|string|in:Open,In Progress,Resolved,Closed'
         ]);
 
         $claim->update($validated);

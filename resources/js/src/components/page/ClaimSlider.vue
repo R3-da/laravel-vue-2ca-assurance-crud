@@ -50,17 +50,24 @@ const title = computed(() =>
 
 // Predefined category options
 const categoryOptions = [
-    { label: 'Reimbursement', value: 'reimbursement' },
-    { label: 'Contract Issue', value: 'contract_issue' },
-    { label: 'Billing Error', value: 'billing_error' },
-    { label: 'Others', value: 'others' },
+    { label: 'Refund', value: 'Refund' },
+    { label: 'Contract Issue', value: 'Contract Issue' },
+    { label: 'Billing Error', value: 'Billing Error' },
+    { label: 'Other', value: 'Other' }
+];
+
+const statusOptions = [
+    { label: 'Open', value: 'Open' },
+    { label: 'In Progress', value: 'In Progress' },
+    { label: 'Resolved', value: 'Resolved' },
+    { label: 'Closed', value: 'Closed' }
 ];
 
 const initialFormData = () => {
     return {
         subject: null,
         detailed_description: null,
-        category: 'others', // Default category to 'Others'
+        category: 'Other', // Default category to 'Others'
         status: 'Open', // Default status to 'Open'
     };
 };
@@ -93,17 +100,19 @@ const schema = yup.object().shape({
     subject: yup.string().nullable().required(),
     detailed_description: yup.string().nullable().required(),
     category: yup.string().oneOf(categoryOptions.map((c) => c.value)).required(),
-    status: yup.string().default('Open'),
+    status: yup.string().oneOf(statusOptions.map((s) => s.value)).required(),
 });
 
 const onSubmit = async () => {
     if (saving.value || updating.value) return;
 
     const data = { ...formData.value };
+    console.log('Form data to validate:', data);
 
     const { validated, errors } = await runYupValidation(schema, data);
     if (!validated) {
         formErrors.value = errors;
+        console.log('Validation errors:', errors);
         return;
     }
     formErrors.value = {};
@@ -116,8 +125,8 @@ const onSubmit = async () => {
         showToast(
             `Claim ${props.claim?.id ? 'updated' : 'created'} successfully`,
         );
-        claimStore.loadClaims();
-        userStore.loadUsers();
+        await claimStore.loadClaims();
+        await userStore.loadUsers();
         emit('hide');
     }
 };
@@ -151,6 +160,16 @@ const onSubmit = async () => {
                     <VSelect
                         v-model="formData.category"
                         :options="categoryOptions"
+                        label="label"
+                        :reduce="option => option.value"
+                        :clearable="false"
+                    />
+                </FormLabelError>
+
+                <FormLabelError label="Status">
+                    <VSelect
+                        v-model="formData.status"
+                        :options="statusOptions"
                         label="label"
                         :reduce="option => option.value"
                         :clearable="false"

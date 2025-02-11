@@ -55,7 +55,7 @@ const onSignIn = async () => {
             class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
         >
             <div
-                class="w-full bg-white rounded-lg dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 shadow-google"
+                class="w-full bg-white rounded-lg dark:border md:mt-0 sm:max-w-2xl xl:p-0 dark:bg-gray-800 dark:border-gray-700 shadow-google"
             >
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1
@@ -65,15 +65,15 @@ const onSignIn = async () => {
                     </h1>
 
                     <!-- Horizontal layout for each credentials block -->
-                    <div class="flex flex-wrap justify-center gap-4 md:gap-8 w-full">
+                    <div class="flex flex-row justify-center gap-4 md:gap-6 w-full">
                         <!-- Admin credentials -->
                         <div class="flex flex-col max-w-[300px]">
                             <div class="font-bold underline">admin credentials</div>
                             <div class="dark:text-[#aaa]">
-                                <b>email:</b> "admin@admin.com"
+                                "admin@admin.com"
                             </div>
                             <div class="dark:text-[#aaa]">
-                                <b>password:</b> "password"
+                                "password"
                             </div>
                         </div>
 
@@ -81,10 +81,10 @@ const onSignIn = async () => {
                         <div class="flex flex-col max-w-[300px]">
                             <div class="font-bold underline">broker credentials</div>
                             <div class="dark:text-[#aaa]">
-                                <b>email:</b> "broker@broker.com"
+                                "broker@broker.com"
                             </div>
                             <div class="dark:text-[#aaa]">
-                                <b>password:</b> "password"
+                                "password"
                             </div>
                         </div>
 
@@ -92,10 +92,10 @@ const onSignIn = async () => {
                         <div class="flex flex-col max-w-[300px]">
                             <div class="font-bold underline">client credentials</div>
                             <div class="dark:text-[#aaa]">
-                                <b>email:</b> "client@client.com"
+                                "client@client.com"
                             </div>
                             <div class="dark:text-[#aaa]">
-                                <b>password:</b> "password"
+                                "password"
                             </div>
                         </div>
                     </div>

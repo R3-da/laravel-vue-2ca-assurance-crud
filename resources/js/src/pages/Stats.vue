@@ -49,16 +49,16 @@ const initChart = () => {
                     label: 'Claims Statistics',
                     data: statsData,
                     backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',  // Open
-                        'rgba(255, 206, 86, 0.2)',  // In Progress
-                        'rgba(153, 102, 255, 0.2)',  // Resolved
-                        'rgba(255, 99, 132, 0.2)'   // Closed
+                        'rgba(34, 197, 94, 0.2)',  // Open: emerald color
+                        'rgba(59, 130, 246, 0.2)',  // In Progress: blue color
+                        'rgba(254, 211, 85, 0.2)',  // Resolved: yellow color
+                        'rgba(168, 85, 247, 0.2)'   // Closed: purple color
                     ],
                     borderColor: [
-                        'rgba(54, 162, 235, 1)',  // Open
-                        'rgba(255, 206, 86, 1)',  // In Progress
-                        'rgba(153, 102, 255, 1)',  // Resolved
-                        'rgba(255, 99, 132, 1)'   // Closed
+                        'rgba(34, 197, 94, 1)',  // Open: emerald color
+                        'rgba(59, 130, 246, 1)',  // In Progress: blue color
+                        'rgba(254, 211, 85, 1)',  // Resolved: yellow color
+                        'rgba(168, 85, 247, 1)'   // Closed: purple color
                     ],
                     borderWidth: 1
                 }]

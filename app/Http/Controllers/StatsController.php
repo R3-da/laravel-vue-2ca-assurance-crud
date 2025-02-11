@@ -19,16 +19,18 @@ class StatsController extends Controller
 
         $query = Claim::query();
 
+        // Apply date range filter if provided
         if ($startDate && $endDate) {
             $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 
+        // Fetch the stats for the different claim statuses
         $stats = [
-            'totalClaims' => $query->count(),
-            'approvedClaims' => (clone $query)->where('status', 'approved')->count(),
-            'pendingClaims' => (clone $query)->where('status', 'pending')->count(),
-            'rejectedClaims' => (clone $query)->where('status', 'rejected')->count(),
+            'totalClaims' => $query->count(), // Total claims
             'openClaims' => (clone $query)->where('status', 'open')->count(),
+            'inProgressClaims' => (clone $query)->where('status', 'in progress')->count(),
+            'resolvedClaims' => (clone $query)->where('status', 'resolved')->count(),
+            'closedClaims' => (clone $query)->where('status', 'closed')->count(),
         ];
 
         return response()->json($stats);

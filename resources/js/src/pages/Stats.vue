@@ -7,81 +7,93 @@ import Chart from 'chart.js/auto';
 import AuthorizationFallback from '../components/page/AuthorizationFallback.vue';
 import useSlider from '../composables/useSlider';
 
-// Add this with other composable initializations
 const { slider, sliderData, showSlider, hideSlider } = useSlider('stats-crud');
 const statsStore = useStatsStore();
 const permissionStore = usePermissionStore();
 const chart = ref(null);
 let chartInstance = null;
 
-// Load initial data
-if (!statsStore.stats.length) {
-    await statsStore.loadStats();
-}
+// Load initial data inside onMounted hook
+onMounted(async () => {
+    if (!statsStore.stats.length) {
+        await statsStore.loadStats();
+    }
+    console.log(statsStore.stats);  // Debugging log to check the structure of stats
+    initChart(); // Initialize chart after loading stats
+});
 
 const initChart = () => {
     if (chartInstance) {
         chartInstance.destroy();
     }
-    
-    const ctx = document.getElementById('statsChart');
-    chartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Total Claims', 'Approved', 'Pending', 'Open', 'Rejected'],
-            datasets: [{
-                label: 'Claims Statistics',
-                data: [
-                    statsStore.stats.totalClaims,
-                    statsStore.stats.approvedClaims,
-                    statsStore.stats.pendingClaims,
-                    statsStore.stats.openClaims,
-                    statsStore.stats.rejectedClaims
-                ],
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
+
+    // Updated statsData to exclude 'Total Claims'
+    const statsData = [
+        statsStore.stats.openClaims,           // Open
+        statsStore.stats.inProgressClaims,     // In Progress
+        statsStore.stats.resolvedClaims,       // Resolved
+        statsStore.stats.closedClaims         // Closed
+    ];
+
+    // Labels now only correspond to the remaining statuses
+    const labels = ['Open', 'In Progress', 'Resolved', 'Closed'];
+
+    // Check if statsData has the right number of items to match the labels
+    if (statsData.length === labels.length) {
+        const ctx = document.getElementById('statsChart');
+        chartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Claims Statistics',
+                    data: statsData,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',  // Open
+                        'rgba(255, 206, 86, 0.2)',  // In Progress
+                        'rgba(153, 102, 255, 0.2)',  // Resolved
+                        'rgba(255, 99, 132, 0.2)'   // Closed
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',  // Open
+                        'rgba(255, 206, 86, 1)',  // In Progress
+                        'rgba(153, 102, 255, 1)',  // Resolved
+                        'rgba(255, 99, 132, 1)'   // Closed
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
+    } else {
+        console.error("Data and labels length mismatch! Check your stats data.");
+    }
 };
 
 watch(() => statsStore.stats, (newStats) => {
     if (chartInstance) {
-        chartInstance.data.datasets[0].data = [
-            newStats.totalClaims,
-            newStats.approvedClaims,
-            newStats.pendingClaims,
+        const statsData = [
             newStats.openClaims,
-            newStats.rejectedClaims
+            newStats.inProgressClaims,
+            newStats.resolvedClaims,
+            newStats.closedClaims
         ];
-        chartInstance.update();
+
+        if (statsData.length === chartInstance.data.labels.length) {
+            chartInstance.data.datasets[0].data = statsData;
+            chartInstance.update();
+        } else {
+            console.error("Data and labels length mismatch during update!");
+        }
     }
 }, { deep: true });
-
-onMounted(() => {
-    initChart();
-});
 
 onUnmounted(() => {
     if (chartInstance) {
@@ -110,24 +122,20 @@ onUnmounted(() => {
                 
                 <div class="grid grid-cols-2 gap-4">
                     <div class="bg-emerald-100 dark:bg-emerald-800 p-4 rounded-lg">
-                        <h3 class="font-bold">Total Claims</h3>
-                        <p class="text-2xl">{{ statsStore.stats.totalClaims }}</p>
-                    </div>
-                    <div class="bg-blue-100 dark:bg-blue-800 p-4 rounded-lg">
-                        <h3 class="font-bold">Approved</h3>
-                        <p class="text-2xl">{{ statsStore.stats.approvedClaims }}</p>
-                    </div>
-                    <div class="bg-yellow-100 dark:bg-yellow-800 p-4 rounded-lg">
-                        <h3 class="font-bold">Pending</h3>
-                        <p class="text-2xl">{{ statsStore.stats.pendingClaims }}</p>
-                    </div>
-                    <div class="bg-purple-100 dark:bg-purple-800 p-4 rounded-lg">
                         <h3 class="font-bold">Open</h3>
                         <p class="text-2xl">{{ statsStore.stats.openClaims }}</p>
                     </div>
-                    <div class="bg-red-100 dark:bg-red-800 p-4 rounded-lg">
-                        <h3 class="font-bold">Rejected</h3>
-                        <p class="text-2xl">{{ statsStore.stats.rejectedClaims }}</p>
+                    <div class="bg-blue-100 dark:bg-blue-800 p-4 rounded-lg">
+                        <h3 class="font-bold">In Progress</h3>
+                        <p class="text-2xl">{{ statsStore.stats.inProgressClaims }}</p>
+                    </div>
+                    <div class="bg-yellow-100 dark:bg-yellow-800 p-4 rounded-lg">
+                        <h3 class="font-bold">Resolved</h3>
+                        <p class="text-2xl">{{ statsStore.stats.resolvedClaims }}</p>
+                    </div>
+                    <div class="bg-purple-100 dark:bg-purple-800 p-4 rounded-lg">
+                        <h3 class="font-bold">Closed</h3>
+                        <p class="text-2xl">{{ statsStore.stats.closedClaims }}</p>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue';
+import useUserStore from '../store/useUserStore';
 import Table from '../components/table/Table.vue';
 import THead from '../components/table/THead.vue';
 import TBody from '../components/table/TBody.vue';
@@ -10,7 +12,6 @@ import EditButton from '../components/ui/EditButton.vue';
 import DeleteButton from '../components/ui/DeleteButton.vue';
 import AuthorizationFallback from '../components/page/AuthorizationFallback.vue';
 import ClaimSlider from '../components/page/ClaimSlider.vue';
-
 import useClaimStore from '../store/useClaimStore';
 import usePermissionStore from '../store/usePermissionStore';
 import useSlider from '../composables/useSlider';
@@ -20,13 +21,22 @@ import useHttpRequest from '../composables/useHttpRequest';
 const claimStore = useClaimStore();
 const permissionStore = usePermissionStore();
 
-if (!permissionStore.permissions.length)
-    await permissionStore.loadPermissions();
+if (!permissionStore.permissions.length) await permissionStore.loadPermissions();
 if (!claimStore.claims?.length) await claimStore.loadClaims();
 
 const { slider, sliderData, showSlider, hideSlider } = useSlider('claim-crud');
 const { showConfirmModal, showToast } = useModalToast();
 const { destroy: deleteClaim, deleting } = useHttpRequest('/claims');
+
+const userStore = useUserStore();
+
+const hasEditPermission = computed(() => {
+    return (
+        (userStore.user?.permissions || []).some((permission) =>
+            ['claims-all', 'claims-edit'].includes(permission?.name)
+        )
+    );
+});
 
 const onDelete = (claim) => {
     if (deleting.value) return;
@@ -101,6 +111,7 @@ const onDelete = (claim) => {
                             <Td class="align-middle">
                                 <div class="flex flex-col gap-2">
                                     <EditButton
+                                        v-if="hasEditPermission"
                                         @click="showSlider(true, claim)"
                                     />
                                     <DeleteButton @click="onDelete(claim)" />

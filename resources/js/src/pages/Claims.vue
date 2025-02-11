@@ -30,6 +30,14 @@ const { destroy: deleteClaim, deleting } = useHttpRequest('/claims');
 
 const userStore = useUserStore();
 
+const hasCreatePermission = computed(() => {
+    return (
+        (userStore.user?.permissions || []).some((permission) =>
+            ['claims-all', 'claims-create'].includes(permission?.name)
+        )
+    );
+});
+
 const hasEditPermission = computed(() => {
     return (
         (userStore.user?.permissions || []).some((permission) =>
@@ -67,7 +75,8 @@ const onDelete = (claim) => {
             <div class="flex-between">
                 <h2 class="text-active font-bold text-2xl">Claims</h2>
 
-                <CreateButton @click="showSlider(true)" />
+                <!-- Create button visible only for users with claims-all or claims-create permissions -->
+                <CreateButton v-if="hasCreatePermission" @click="showSlider(true)" />
             </div>
 
             <div class="w-full">

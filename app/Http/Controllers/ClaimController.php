@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Claim;
 use Illuminate\Http\Request;
+use App\Mail\ClaimStatusUpdated;
+use Illuminate\Support\Facades\Mail;
 
 class ClaimController extends Controller
 {
@@ -64,6 +66,10 @@ class ClaimController extends Controller
         ]);
 
         $claim->update($validated);
+
+        // Send email notification
+        Mail::to($claim->user->email)->send(new ClaimStatusUpdated($claim));
+
         return response()->json($claim);
     }
 

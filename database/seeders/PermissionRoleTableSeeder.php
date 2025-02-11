@@ -17,8 +17,8 @@ class PermissionRoleTableSeeder extends Seeder
 
         // Add claims-related permissions to client and broker
         // Client role gets 'claims-view' and 'claims-create'
-        $clientRoleId = 2; // Assuming the role ID for Client is 2
-        $brokerRoleId = 3; // Assuming the role ID for Broker is 3
+        $clientRoleId = 3; // Assuming the role ID for Client is 3
+        $brokerRoleId = 2; // Assuming the role ID for Broker is 2
 
         $permissionRole[] = ['role_id' => $clientRoleId, 'permission_id' => 2, 'created_at' => now()]; // claims-view
         $permissionRole[] = ['role_id' => $clientRoleId, 'permission_id' => 3, 'created_at' => now()]; // claims-create

@@ -38,6 +38,14 @@ const hasEditPermission = computed(() => {
     );
 });
 
+const hasDeletePermission = computed(() => {
+    return (
+        (userStore.user?.permissions || []).some((permission) =>
+            ['claims-all', 'claims-delete'].includes(permission?.name)
+        )
+    );
+});
+
 const onDelete = (claim) => {
     if (deleting.value) return;
 
@@ -114,7 +122,10 @@ const onDelete = (claim) => {
                                         v-if="hasEditPermission"
                                         @click="showSlider(true, claim)"
                                     />
-                                    <DeleteButton @click="onDelete(claim)" />
+                                    <DeleteButton
+                                        v-if="hasDeletePermission"
+                                        @click="onDelete(claim)"
+                                    />
                                 </div>
                             </Td>
                         </Tr>

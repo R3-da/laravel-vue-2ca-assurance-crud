@@ -64,15 +64,39 @@ const onSignIn = async () => {
                         Sign in to your account
                     </h1>
 
-                    <div>
-                        <div class="font-bold underline">
-                            admin credentials
+                    <!-- Horizontal layout for each credentials block -->
+                    <div class="flex flex-wrap justify-center gap-4 md:gap-8 w-full">
+                        <!-- Admin credentials -->
+                        <div class="flex flex-col max-w-[300px]">
+                            <div class="font-bold underline">admin credentials</div>
+                            <div class="dark:text-[#aaa]">
+                                <b>email:</b> "admin@admin.com"
+                            </div>
+                            <div class="dark:text-[#aaa]">
+                                <b>password:</b> "password"
+                            </div>
                         </div>
-                        <div class="dark:text-[#aaa]">
-                            <b>email:</b> "admin@admin.com"
+
+                        <!-- Broker credentials -->
+                        <div class="flex flex-col max-w-[300px]">
+                            <div class="font-bold underline">broker credentials</div>
+                            <div class="dark:text-[#aaa]">
+                                <b>email:</b> "broker@broker.com"
+                            </div>
+                            <div class="dark:text-[#aaa]">
+                                <b>password:</b> "password"
+                            </div>
                         </div>
-                        <div class="dark:text-[#aaa]">
-                            <b>password:</b> "password"
+
+                        <!-- Client credentials -->
+                        <div class="flex flex-col max-w-[300px]">
+                            <div class="font-bold underline">client credentials</div>
+                            <div class="dark:text-[#aaa]">
+                                <b>email:</b> "client@client.com"
+                            </div>
+                            <div class="dark:text-[#aaa]">
+                                <b>password:</b> "password"
+                            </div>
                         </div>
                     </div>
 
@@ -128,4 +152,3 @@ const onSignIn = async () => {
         </div>
     </section>
 </template>
-../store/useAuthUserStore

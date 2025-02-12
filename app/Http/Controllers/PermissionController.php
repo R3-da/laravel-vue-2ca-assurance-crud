@@ -34,7 +34,11 @@ class PermissionController extends Controller
         'permissions-edit',
         'permissions-delete',
         'stats-all',
-        'stats-view'
+        'stats-view',
+        'attachments-all',
+        'attachments-view',
+        'attachments-create',
+        'attachments-delete'
     ];
 
     public function index(Request $request)

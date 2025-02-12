@@ -19,6 +19,7 @@ class PermissionTableSeeder extends Seeder
             'claims-create',
             'claims-edit',
             'claims-delete',
+            'users-all',
             'users-view',
             'users-create',
             'users-edit',
@@ -34,7 +35,11 @@ class PermissionTableSeeder extends Seeder
             'permissions-edit',
             'permissions-delete',
             'stats-all',
-            'stats-view'
+            'stats-view',
+            'attachments-all',
+            'attachments-view',
+            'attachments-create',
+            'attachments-delete'
         ];
 
         $permissions = array_map(function ($name) {

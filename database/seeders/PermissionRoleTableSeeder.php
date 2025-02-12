@@ -27,7 +27,7 @@ class PermissionRoleTableSeeder extends Seeder
         $permissionRole[] = ['role_id' => $brokerRoleId, 'permission_id' => 4, 'created_at' => now()]; // claims-edit
 
         // Add the rest of the permissions to role_id 1 (admin)
-        for ($i = 1; $i <= 21; $i++) {
+        for ($i = 1; $i <= 26; $i++) {
             $permissionRole[] = [
                 'role_id' => 1, // Assuming 1 is for Admin
                 'permission_id' => $i,

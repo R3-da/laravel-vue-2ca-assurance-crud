@@ -70,10 +70,10 @@ const onSignIn = async () => {
                         <div class="flex flex-col max-w-[300px]">
                             <div class="font-bold underline">admin credentials</div>
                             <div class="dark:text-[#aaa]">
-                                "admin@admin.com"
+                                admin@admin.com
                             </div>
                             <div class="dark:text-[#aaa]">
-                                "password"
+                                password
                             </div>
                         </div>
 
@@ -81,10 +81,10 @@ const onSignIn = async () => {
                         <div class="flex flex-col max-w-[300px]">
                             <div class="font-bold underline">broker credentials</div>
                             <div class="dark:text-[#aaa]">
-                                "broker@broker.com"
+                                broker@broker.com
                             </div>
                             <div class="dark:text-[#aaa]">
-                                "password"
+                                password
                             </div>
                         </div>
 
@@ -92,10 +92,10 @@ const onSignIn = async () => {
                         <div class="flex flex-col max-w-[300px]">
                             <div class="font-bold underline">client credentials</div>
                             <div class="dark:text-[#aaa]">
-                                "client@client.com"
+                                client@client.com
                             </div>
                             <div class="dark:text-[#aaa]">
-                                "password"
+                                password
                             </div>
                         </div>
                     </div>

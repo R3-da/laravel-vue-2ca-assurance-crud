@@ -35,6 +35,15 @@ You can use the following credentials to log in to the system:
 - [ ] Enable file uploads for attachments with size and type validation.
 - [ ] Implement an internal messaging system within claims between clients and brokers
 
+## Prerequisites
+
+This project was developed and tested using the following versions:
+
+- **Node.js**: Version 20.10.0
+- **PHP**: Version 8.2.27
+- **Laravel**: Version 10.10
+- **Composer**: Version 2.8.4
+
 ## Installation
 
 Follow these steps to set up the project locally:

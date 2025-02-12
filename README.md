@@ -49,7 +49,10 @@ Following credentials can be used to log in the system
 </table>
 <br>
 
-Initailly only Admin is granted all the permissions. All other role has no permissions. To add permissions to any other role, first log in as super admin, then go to the roles page. Assign necessary permissions to the role. Then come to the users page and update users roles. One user can have multiple roles. Overall user permissions will be the collection of all roles permissions combined. admin role is readonly(can not be edited or deleted). This role can not be applied to any other user. If a new permission is created, updated or deleted, it will be automatically applied to admin.
+## Initial Permissions:
+- Admin is granted all the permissions.
+- Broker is granted (claims-view, claims-edit, attachments-view)
+- Client is granted (claims-view, claims-create, attachments-view, attachments-create)
 
 ## Installation
 
@@ -60,7 +63,9 @@ First download this repository. Navigate to root of the project and then
     <code>npm install</code>
 </pre>
 
-Copy the contents of .env.example to .env file. Fill up the database credentials(DB_DATABASE, DB_USERNAME, DB_PASSWORD) according to your database. At the root of your project run the following commands on terminal sequentially.
+Copy the contents of .env.example to .env file. Fill up the database credentials (DB_DATABASE, DB_USERNAME, DB_PASSWORD) according to your database, Fill up you SMTP mailer config (MAIL_HOST, MAIL_USERNAME, MAIL_PASSWORD, MAIL_FROM_ADDRESS).
+
+At the root of your project run the following commands on terminal sequentially.
 
 <pre>
     <code>php artisan key:generate</code>

@@ -22,9 +22,13 @@ class PermissionRoleTableSeeder extends Seeder
 
         $permissionRole[] = ['role_id' => $clientRoleId, 'permission_id' => 2, 'created_at' => now()]; // claims-view
         $permissionRole[] = ['role_id' => $clientRoleId, 'permission_id' => 3, 'created_at' => now()]; // claims-create
+        $permissionRole[] = ['role_id' => $clientRoleId, 'permission_id' => 24, 'created_at' => now()]; // attachments-view
+        $permissionRole[] = ['role_id' => $clientRoleId, 'permission_id' => 25, 'created_at' => now()]; // attachments-create
 
         $permissionRole[] = ['role_id' => $brokerRoleId, 'permission_id' => 2, 'created_at' => now()]; // claims-view
         $permissionRole[] = ['role_id' => $brokerRoleId, 'permission_id' => 4, 'created_at' => now()]; // claims-edit
+        $permissionRole[] = ['role_id' => $brokerRoleId, 'permission_id' => 24, 'created_at' => now()]; // attachments-view
+
 
         // Add the rest of the permissions to role_id 1 (admin)
         for ($i = 1; $i <= 26; $i++) {

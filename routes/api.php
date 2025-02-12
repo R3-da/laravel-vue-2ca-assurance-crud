@@ -138,4 +138,23 @@ Route::middleware('auth:sanctum')->group(function () {
         'index'
     ])->middleware(['auth:sanctum', 'permission:stats-all|stats-view']);
 
+    /**
+     * ------------------------------------------------------------------------
+     * attachments routes
+     * ------------------------------------------------------------------------
+     */
+    Route::get('/claims/{claim}/attachments', [
+        \App\Http\Controllers\AttachmentController::class,
+        'index'
+    ])->middleware('permission:attachments-all|attachments-view');
+    
+    Route::post('/claims/{claim}/attachments', [
+        \App\Http\Controllers\AttachmentController::class,
+        'store'
+    ])->middleware('permission:attachments-all|attachments-create');
+    
+    Route::delete('/claims/{claim}/attachments/{attachment}', [
+        \App\Http\Controllers\AttachmentController::class,
+        'destroy'
+    ])->middleware('permission:attachments-all|attachments-delete');
 });

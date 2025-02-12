@@ -1,86 +1,81 @@
-## About This Repository
+# Insurance Claims Management System
 
-a Laravel and Vue.js Livewire Inerbased web application for managing Insurance Claims for 2CA Business.
+This repository contains a web application built with **Laravel** and **Vue.js Livewire** for managing insurance claims for **2CA Business**. The application provides role-based access control, allowing **Admin**, **Broker**, and **Client** users to perform specific actions based on their permissions.
 
 ## Preview
 
+[![Preview](https://github.com/user-attachments/assets/b71feb52-239e-484e-8b4a-99b194e4aa4f)](https://github.com/user-attachments/assets/b71feb52-239e-484e-8b4a-99b194e4aa4f)
 
-https://github.com/user-attachments/assets/b71feb52-239e-484e-8b4a-99b194e4aa4f
+## Login Credentials
 
+You can use the following credentials to log in to the system:
 
+| Sl  | Role   | Email Address      | Password  |
+|-----|--------|--------------------|-----------|
+| 01  | Admin  | admin@admin.com    | password  |
+| 02  | Broker | broker@broker.com  | password  |
+| 03  | Client | client@client.com  | password  |
 
-## Logging In
+## Initial Permissions
 
-Following credentials can be used to log in the system
+- **Admin**: Granted all permissions.
+- **Broker**: Granted `claims-view`, `claims-edit`, and `attachments-view`.
+- **Client**: Granted `claims-view`, `claims-create`, `attachments-view`, and `attachments-create`.
 
-<table>
-    <thead>
-       <tr>
-            <th>Sl</th>
-            <th>Role</th>
-            <th>Email Address</th>
-            <th>Password</th>
-       </tr> 
-    </thead>
-    <tbody>
-        <tr>
-            <td>01</td>
-            <td>Admin</td>
-            <td>admin@admin.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-    <tbody>
-        <tr>
-            <td>02</td>
-            <td>Broker</td>
-            <td>broker@broker.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-        <tbody>
-        <tr>
-            <td>03</td>
-            <td>Client</td>
-            <td>client@client.com</td>
-            <td>password</td>
-        </tr>
-    </tbody>
-</table>
-<br>
+---
 
-## Initial Permissions:
-- Admin is granted all the permissions.
-- Broker is granted (claims-view, claims-edit, attachments-view)
-- Client is granted (claims-view, claims-create, attachments-view, attachments-create)
+## Backlog
+
+### Features to Implement
+- [x] Implement a role management system for Admins to manage user roles and permissions dynamically.
+- [x] Client can submit a new claim.
+- [x] Broker can update the status of the claim.
+- [x] Implement email notifications for claim updates.
+- [x] Add a dashboard with analytics for claims.
+- [ ] Enable file uploads for attachments with size and type validation.
+- [ ] Implement an internal messaging system within claims between clients and brokers
 
 ## Installation
 
-First download this repository. Navigate to root of the project and then
+Follow these steps to set up the project locally:
 
-<pre>
-    <code>composer install</code>
-    <code>npm install</code>
-</pre>
+1. **Clone the repository and install dependencies**:
+```bash
+   git clone https://github.com/your-repo-url.git
 
-Copy the contents of .env.example to .env file. Fill up the database credentials (DB_DATABASE, DB_USERNAME, DB_PASSWORD) according to your database, Fill up you SMTP mailer config (MAIL_HOST, MAIL_USERNAME, MAIL_PASSWORD, MAIL_FROM_ADDRESS).
+   cd your-repo-directory
 
-At the root of your project run the following commands on terminal sequentially.
+   composer install
 
-<pre>
-    <code>php artisan key:generate</code>
-    <code>php artisan migrate</code>
-    <code>php artisan db:seed</code>
-</pre>
+   npm install
+```
 
-This will store all the default data into the database. Then compile the assets and run development server by
+2. **Set up the following env variables**:
+```bash
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+MAIL_HOST=your_smtp_host
+MAIL_USERNAME=your_smtp_username
+MAIL_PASSWORD=your_smtp_password
+MAIL_FROM_ADDRESS=your_email_address
+```
 
-<pre>
-    <code>npm run dev</code>
-</pre>
+3. **Generate application key:**:
+```bash
+php artisan key:generate
+```
 
-Finally initiate your server on a new terminal
+3. **Generate application key:**:
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-<pre>
-    <code>php artisan serve</code>
-</pre>
+3. **Launch dev server:**:
+```bash
+php artisan serve
+npm run dev
+```
+
+   

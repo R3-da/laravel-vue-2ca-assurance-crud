@@ -2,6 +2,13 @@
 
 a Laravel and Vue.js Livewire Inerbased web application for managing Insurance Claims for 2CA Business.
 
+## Preview
+
+
+https://github.com/user-attachments/assets/b71feb52-239e-484e-8b4a-99b194e4aa4f
+
+
+
 ## Logging In
 
 Following credentials can be used to log in the system

@@ -1,5 +1,6 @@
 <script setup>
 import { inject, computed } from 'vue';
+import { useRoute } from 'vue-router';
 import useHttpRequest from '../composables/useHttpRequest';
 import useUserStore from '../store/useUserStore';
 import useRoleStore from '../store/useRoleStore';
@@ -32,6 +33,12 @@ const hasPermission = (permissions) => {
         permissions.includes(p?.name)
     );
 };
+
+const route = useRoute();
+
+const isActive = (name) => {
+    return route.name === name;
+};
 </script>
 
 <template>
@@ -50,19 +57,39 @@ const hasPermission = (permissions) => {
         <div class="flex-start gap-4 lg:gap-8">
             <div class="flex flex-col gap-0.5">
                 <div class="flex-start gap-6 lg:gap-8">
-                    <RouterLink v-if="hasPermission(['stats-all', 'stats-view'])" :to="{ name: 'stats' }">
+                    <RouterLink
+                        v-if="hasPermission(['stats-all', 'stats-view'])"
+                        :to="{ name: 'stats' }"
+                        :class="{ 'text-active-hover': isActive('stats') }"
+                    >
                         <span class="lg:text-lg font-bold hover:text-active-hover">Stats</span>
                     </RouterLink>
-                    <RouterLink v-if="hasPermission(['claims-all', 'claims-view'])" :to="{ name: 'claims' }">
+                    <RouterLink
+                        v-if="hasPermission(['claims-all', 'claims-view'])"
+                        :to="{ name: 'claims' }"
+                        :class="{ 'text-active-hover': isActive('claims') }"
+                    >
                         <span class="lg:text-lg font-bold hover:text-active-hover">Claims</span>
                     </RouterLink>
-                    <RouterLink v-if="hasPermission(['users-all', 'users-view'])" :to="{ name: 'users' }">
+                    <RouterLink
+                        v-if="hasPermission(['users-all', 'users-view'])"
+                        :to="{ name: 'users' }"
+                        :class="{ 'text-active-hover': isActive('users') }"
+                    >
                         <span class="lg:text-lg font-bold hover:text-active-hover">Users</span>
                     </RouterLink>
-                    <RouterLink v-if="hasPermission(['roles-all', 'roles-view'])" :to="{ name: 'roles' }">
+                    <RouterLink
+                        v-if="hasPermission(['roles-all', 'roles-view'])"
+                        :to="{ name: 'roles' }"
+                        :class="{ 'text-active-hover': isActive('roles') }"
+                    >
                         <span class="lg:text-lg font-bold hover:text-active-hover">Roles</span>
                     </RouterLink>
-                    <RouterLink v-if="hasPermission(['permissions-all', 'permissions-view'])" :to="{ name: 'permissions' }">
+                    <RouterLink
+                        v-if="hasPermission(['permissions-all', 'permissions-view'])"
+                        :to="{ name: 'permissions' }"
+                        :class="{ 'text-active-hover': isActive('permissions') }"
+                    >
                         <span class="lg:text-lg font-bold hover:text-active-hover">Permissions</span>
                     </RouterLink>
 
